@@ -4,7 +4,8 @@
   "description": "expresso models",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js",
+    "publish": "npm publish"
   },
   "repository": {
     "type": "git",
