@@ -4,16 +4,23 @@
   "description": "expresso models",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/khattab88/expresso-models.git"
+    "url": "git+https://github.com/expresso-app/expresso-models.git"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/khattab88/expresso-models/issues"
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "mongoose": "^5.9.23",
+    "slugify": "^1.4.4",
+    "uuid": "^8.2.0",
+    "validator": "^13.1.1"
   },
-  "homepage": "https://github.com/khattab88/expresso-models#readme"
+  "bugs": {
+    "url": "https://github.com/expresso-app/expresso-models/issues"
+  },
+  "homepage": "https://github.com/expresso-app/expresso-models#readme"
 }
