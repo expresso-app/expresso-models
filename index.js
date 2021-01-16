@@ -6,14 +6,18 @@ const Menu = require("./models/menu-model");
 const Restaurant = require("./models/restaurant-model");
 const Tag = require("./models/tag-model");
 const User = require("./models/user-model");
+const MenuSection = require("./models/menuSection-model");
+const MenuItem = require("./models/menuItem-model");
 
 module.exports = {
-    Area,
-    Branch,
-    City,
+    User,
     Country,
-    Menu,
-    Restaurant,
+    City,
+    Area,
     Tag,
-    User
+    Restaurant,
+    Branch,
+    Menu,
+    MenuSection,
+    MenuItem
 };

@@ -60,13 +60,13 @@ const menuItemSchema = new mongoose.Schema(
     toObject: { virtuals: true }
 });
 
-// embed menu section object as a child document
-menuSchema.pre("save", async function(next) {
-    const menuSection = await MenuSection.findOne({ id: this.menuSection });
-    this.menuSection = menuSection;
+// // embed menu section object as a child document
+// menuItemSchema.pre("save", async function(next) {
+//     const menuSection = await MenuSection.findOne({ id: this.menuSection });
+//     this.menuSection = menuSection;
 
-    next();
-});
+//     next();
+// });
 
 const MenuItem = mongoose.model("MenuItem", menuItemSchema);
 
