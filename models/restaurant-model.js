@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 const slugify = require('slugify');
 const validator = require('validator')
 
+// const Menu = require('./menu-model');
 const Tag = require('./tag-model');
 
 const restaurantSchema = new mongoose.Schema({
@@ -30,7 +31,7 @@ const restaurantSchema = new mongoose.Schema({
         type: Number,
         validate: {
             message: "delivery time ({VALUE}) must be less than 60!",
-            validator: function(val) {
+            validator: function (val) {
                 return val < 60;
             }
         }
@@ -42,7 +43,6 @@ const restaurantSchema = new mongoose.Schema({
         default: 0,
         max: [5, "rating must be below 5.0!"],
     },
-    tags: Array,
     slug: {
         type: String,
         validate: {
@@ -54,6 +54,7 @@ const restaurantSchema = new mongoose.Schema({
         type: Date,
         default: new Date(),
     },
+    tags: Array,
     // level: {
     //     type: String,
     //     required: [true, "Restaurant must have a level!"],
@@ -61,62 +62,8 @@ const restaurantSchema = new mongoose.Schema({
     //         values: ["A", "B", "C"],
     //         message: "Level is either A, B or C!"
     //     }
-    // }
-    menu: {
-        id: {
-            type: String,
-            default: uuidv4,
-            unique: true,
-        },
-        menuSections: [
-            {
-                id: {
-                    type: String,
-                    default: uuidv4,
-                    unique: true,
-                },
-                name: String,
-                menuItems: [
-                    {
-                        id: {
-                            type: String,
-                            default: uuidv4,
-                            unique: true,
-                        },
-                        name: String,
-                        price: Number,
-                        description: String,
-                        image: String,
-                        options: [
-                            {
-                                id: {
-                                    type: String,
-                                    default: uuidv4,
-                                    unique: true,
-                                },
-                                name: String,
-                                type: {
-                                    type: String,
-                                    enum: ["Required", "Optional"]
-                                },
-                                optionItems: [
-                                    {
-                                        id: {
-                                            type: String,
-                                            default: uuidv4,
-                                            unique: true,
-                                        },
-                                        name: String,
-                                        value: Number
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    }
+    // },
+    //menu: Object,
 }, {
     toJSON: { virtuals: true },
     toObject: { virtuals: true }
@@ -132,7 +79,7 @@ restaurantSchema.index({ deliveryTime: 1, deliveryFee: -1 });
 
 
 // virtual properties
-restaurantSchema.virtual("deliveryRate").get(function() {
+restaurantSchema.virtual("deliveryRate").get(function () {
     return (this.deliveryFee / this.deliveryTime).toFixed(2) * 1;
 });
 
@@ -145,43 +92,51 @@ restaurantSchema.virtual("deliveryRate").get(function() {
 
 
 // Document middleware: runs BEFORE .save() and .create()
-restaurantSchema.pre("save", function(next) {
+restaurantSchema.pre("save", function (next) {
     // eslint-disable-next-line prefer-destructuring
     this.slug = slugify(this.name, {
         lower: true,
-        remove: /[*+~.()'"!:@]/g 
+        remove: /[*+~.()'"!:@]/g
     });
     next();
 });
 
 // tags array as a child collection
-restaurantSchema.pre("save", async function(next) {
+restaurantSchema.pre("save", async function (next) {
     const tagPromises = this.tags.map(async id => await Tag.findOne({ id: id }));
     this.tags = await Promise.all(tagPromises);
 
     next();
 });
 
+// // embed menu object as a child document
+// restaurantSchema.pre("save", async function(next) {
+//     const menu = await Menu.findOne({ id: this.menu });
+//     this.menu = menu;
+
+//     next();
+// });
+
 // Document middleware: runs AFTER .save() and .create()
-restaurantSchema.post("save", function(doc, next) {
+restaurantSchema.post("save", function (doc, next) {
     //console.log(doc);
     next();
 });
 
 // Query middleware: runs BEFORE .find(), findOne() and findOneAnd...()
-restaurantSchema.pre(/^find/, function(next) {
+restaurantSchema.pre(/^find/, function (next) {
     // this.find({ specialOffers: { $ne: false } })
     next();
 });
 
 // Query middleware: runs AFTER .find(), findOne() and findOneAnd...()
-restaurantSchema.post(/^find/, function(docs, next) {
+restaurantSchema.post(/^find/, function (docs, next) {
     // console.log(docs);
     next();
 });
 
 // Aggregate middleware: runs BEFORE .aggregate()
-restaurantSchema.pre("aggregate", function(next) {
+restaurantSchema.pre("aggregate", function (next) {
     // console.log(this.pipeline());
     next();
 });
