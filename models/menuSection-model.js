@@ -23,13 +23,13 @@ const menuSectionSchema = new mongoose.Schema({
 });
 
 
-// embed menu object as a child document
-menuSectionSchema.pre("save", async function(next) {
-    const menu = await Menu.findOne({ id: this.menu });
-    this.menu = menu;
+// // embed menu object as a child document
+// menuSectionSchema.pre("save", async function(next) {
+//     const menu = await Menu.findOne({ id: this.menu });
+//     this.menu = menu;
 
-    next();
-});
+//     next();
+// });
 
 // embed menu items collection as a child documents
 menuSectionSchema.pre("save", async function(next) {
