@@ -63,7 +63,6 @@ const restaurantSchema = new mongoose.Schema({
     //         message: "Level is either A, B or C!"
     //     }
     // },
-    //menu: Object,
 }, {
     toJSON: { virtuals: true },
     toObject: { virtuals: true }

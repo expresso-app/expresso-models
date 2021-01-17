@@ -52,7 +52,8 @@ const menuItemSchema = new mongoose.Schema(
             }
         ],
         menuSection: {
-            type: Object,
+            type: mongoose.Schema.ObjectId,
+            ref: "MenuSection",
             required: [true, "Menu Item must be associated with a menu section!"]
         },
     }, {
@@ -67,6 +68,16 @@ const menuItemSchema = new mongoose.Schema(
 
 //     next();
 // });
+
+// reference menu (parent) documnet vai populate()
+menuItemSchema.pre(/^find/, async function(next) {
+    this.populate({
+        path: "menuSection",
+        select: "-__v -createdAt"
+    });
+
+    next();
+});
 
 const MenuItem = mongoose.model("MenuItem", menuItemSchema);
 

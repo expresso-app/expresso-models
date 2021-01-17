@@ -13,7 +13,8 @@ const menuSchema = new mongoose.Schema({
     },
     // name: String,
     restaurant: {
-        type: Object,
+        type: mongoose.Schema.ObjectId,
+        ref: "Restaurant",
         required: [true, "Menu must be associated with an restaurant!"]
     },
     menuSections: Array
@@ -28,16 +29,26 @@ const menuSchema = new mongoose.Schema({
 //     next();
 // });
 
-// embed menu sections collection as a child documents
-menuSchema.pre("save", async function(next) {
-    const menuSectionPromises = this.menuSections.map(async id => await MenuSection.findOne({ id: id }));
-    this.menuSections = await Promise.all(menuSectionPromises);
-
-    // eslint-disable-next-line no-return-assign
-    this.menuSections.forEach(menuSection => menuSection.menu = undefined);
+// reference restaurant (parent) documnet vai populate()
+menuSchema.pre(/^find/, async function(next) {
+    this.populate({
+        path: "restaurant",
+        select: "-__v -createdAt"
+    });
 
     next();
 });
+
+// embed menu sections collection as a child documents
+// menuSchema.pre("save", async function(next) {
+//     const menuSectionPromises = this.menuSections.map(async id => await MenuSection.findOne({ id: id }));
+//     this.menuSections = await Promise.all(menuSectionPromises);
+
+//     // eslint-disable-next-line no-return-assign
+//     this.menuSections.forEach(menuSection => menuSection.menu = undefined);
+
+//     next();
+// });
 
 const Menu = mongoose.model("Menu", menuSchema);
 
