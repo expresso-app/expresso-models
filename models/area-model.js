@@ -26,7 +26,11 @@ const areaSchema = new mongoose.Schema({
             message: "slug ({VALUE}) is not a valid slug!"
         }
     },
-    city: Object
+    city: {
+        type: mongoose.Schema.ObjectId,
+        ref: "City",
+        required: [true, "Area must be associated with a city!"]
+    }
 }
 // ,{
 //     toJSON: { virtuals: true },
@@ -51,6 +55,16 @@ areaSchema.pre("save", function(next) {
 
 //     next();
 // });
+
+// reference city (parent) documnet vai populate()
+areaSchema.pre(/^find/, async function(next) {
+    this.populate({
+        path: "city",
+        select: "-__v -createdAt -areas"
+    });
+
+    next();
+});
 
 const Area = mongoose.model("Area", areaSchema);
 

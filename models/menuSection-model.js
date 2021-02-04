@@ -36,7 +36,7 @@ const menuSectionSchema = new mongoose.Schema({
 menuSectionSchema.pre(/^find/, async function(next) {
     this.populate({
         path: "menu",
-        select: "-__v -createdAt"
+        select: "-__v -createdAt -menuSection"
     });
 
     next();

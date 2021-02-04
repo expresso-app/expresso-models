@@ -26,7 +26,11 @@ const citySchema = new mongoose.Schema({
             message: "slug ({VALUE}) is not a valid slug!"
         }
     },
-    country: Object,
+    country: {
+        type: mongoose.Schema.ObjectId,
+        ref: "Country",
+        required: [true, "City must be associated with a country!"]
+    },
     areas: Array
 });
 
@@ -47,13 +51,25 @@ citySchema.pre("save", function(next) {
 });
 
 
-// embed country object as a child document
-citySchema.pre("save", async function(next) {
-    const country = await Country.findOne({ id: this.country });
-    this.country = country;
+/* Query middleware */
+/// embed country object as a child document
+// citySchema.pre("save", async function(next) {
+//     const country = await Country.findOne({ id: this.country });
+//     this.country = country;
+
+//     next();
+// });
+
+// reference country (parent) documnet vai populate()
+citySchema.pre(/^find/, async function(next) {
+    this.populate({
+        path: "country",
+        select: "-__v -createdAt"
+    });
 
     next();
 });
+
 
 // embed areas collection as a child documents
 citySchema.pre("save", async function(next) {
