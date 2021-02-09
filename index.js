@@ -8,6 +8,7 @@ const Tag = require("./models/tag-model");
 const User = require("./models/user-model");
 const MenuSection = require("./models/menuSection-model");
 const MenuItem = require("./models/menuItem-model");
+const menuItemOption = require("./models/menuItemOption-model");
 
 module.exports = {
     User,
@@ -19,5 +20,6 @@ module.exports = {
     Branch,
     Menu,
     MenuSection,
-    MenuItem
+    MenuItem,
+    menuItemOption
 };
