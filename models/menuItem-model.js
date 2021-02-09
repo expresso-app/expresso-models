@@ -56,16 +56,16 @@ menuItemSchema.pre(/^find/, async function(next) {
     next();
 });
 
-// embed areas collection as a child documents
-menuItemSchema.pre("save", async function(next) {
-    const optionPromises = this.options.map(async id => await MenuItemOption.findOne({ id: id }));
-    this.options = await Promise.all(optionPromises);
+// // embed areas collection as a child documents
+// menuItemSchema.pre("save", async function(next) {
+//     const optionPromises = this.options.map(async id => await MenuItemOption.findOne({ id: id }));
+//     this.options = await Promise.all(optionPromises);
 
-    // eslint-disable-next-line no-return-assign
-    this.options.forEach(opt => opt.menuItem = undefined);
+//     // eslint-disable-next-line no-return-assign
+//     this.options.forEach(opt => opt.menuItem = undefined);
 
-    next();
-});
+//     next();
+// });
 
 const MenuItem = mongoose.model("MenuItem", menuItemSchema);
 
