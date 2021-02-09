@@ -1,6 +1,6 @@
 {
   "name": "expresso-models",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "expresso models",
   "main": "index.js",
   "scripts": {
