@@ -5,7 +5,7 @@ const slugify = require('slugify');
 const validator = require('validator');
 
 const MenuSection = require("./menuSection-model");
-const MenuItemOption = require("./menuItemOption");
+const MenuItemOption = require("./menuItemOption-model");
 
 const menuItemSchema = new mongoose.Schema(
     {
