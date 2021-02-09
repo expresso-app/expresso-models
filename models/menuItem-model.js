@@ -5,6 +5,7 @@ const slugify = require('slugify');
 const validator = require('validator');
 
 const MenuSection = require("./menuSection-model");
+const MenuItemOption = require("./menuItemOption");
 
 const menuItemSchema = new mongoose.Schema(
     {
@@ -26,31 +27,7 @@ const menuItemSchema = new mongoose.Schema(
             required: [true, "Menu Item must have a description!"]
         },
         image: String,
-        options: [
-            {
-                id: {
-                    type: String,
-                    default: uuidv4,
-                    unique: true,
-                },
-                name: String,
-                type: {
-                    type: String,
-                    enum: ["Required", "Optional"]
-                },
-                optionItems: [
-                    {
-                        id: {
-                            type: String,
-                            default: uuidv4,
-                            unique: true,
-                        },
-                        name: String,
-                        value: Number
-                    }
-                ]
-            }
-        ],
+        options: Array,
         menuSection: {
             type: mongoose.Schema.ObjectId,
             ref: "MenuSection",
@@ -75,6 +52,17 @@ menuItemSchema.pre(/^find/, async function(next) {
         path: "menuSection",
         select: "-__v -createdAt -menuItems"
     });
+
+    next();
+});
+
+// embed areas collection as a child documents
+menuItemSchema.pre("save", async function(next) {
+    const optionPromises = this.options.map(async id => await MenuItemOption.findOne({ id: id }));
+    this.options = await Promise.all(optionPromises);
+
+    // eslint-disable-next-line no-return-assign
+    this.options.forEach(opt => opt.menuItem = undefined);
 
     next();
 });
