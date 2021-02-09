@@ -27,7 +27,7 @@ const countrySchema = new mongoose.Schema({
     alias: String,
     image: String,
     currency: String,
-    // numOfCities: Number
+    numOfCities: Number
 });
 
 // Document middleware: runs BEFORE .save() and .create()
