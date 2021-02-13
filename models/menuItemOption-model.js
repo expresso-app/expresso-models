@@ -18,23 +18,7 @@ const menuItemOptionSchema = new mongoose.Schema({
         type: String,
         enum: ["Required", "Optional"]
     },
-    optionItems: [
-        {
-            id: {
-                type: String,
-                default: uuidv4,
-                unique: true,
-            },
-            name: {
-                type: String,
-                required: [true, "Menu Item Option Item must have a name!"]
-            },
-            value: {
-                type: Number,
-                required: [true, "Menu Item Option Item must have a value!"]
-            },
-        }
-    ],
+    optionItems: Array,
     menuItem: {
         type: mongoose.Schema.ObjectId,
         ref: "MenuItem",

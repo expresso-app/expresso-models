@@ -9,5 +9,8 @@ const models = require("./index");
 // const menuItem = new models.MenuItem();
 // console.log(menuItem.constructor);
 
-const menuItemOption = new models.MenuItemOption();
-console.log(menuItemOption.constructor);
+// const menuItemOption = new models.MenuItemOption();
+// console.log(menuItemOption.constructor);
+
+const menuItemOptionItem = new models.MenuItemOptionItem();
+console.log(menuItemOptionItem.constructor);
