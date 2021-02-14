@@ -18,7 +18,10 @@ const menuItemOptionSchema = new mongoose.Schema({
         type: String,
         enum: ["Required", "Optional"]
     },
-    optionItems: Array,
+    optionItems: {
+        type: Array,
+        sparse: true
+    },
     menuItem: {
         type: mongoose.Schema.ObjectId,
         ref: "MenuItem",
