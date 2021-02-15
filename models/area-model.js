@@ -57,14 +57,14 @@ areaSchema.pre("save", function(next) {
 // });
 
 // reference city (parent) documnet vai populate()
-areaSchema.pre(/^find/, async function(next) {
-    this.populate({
-        path: "city",
-        select: "-__v -createdAt -areas"
-    });
+// areaSchema.pre(/^find/, async function(next) {
+//     this.populate({
+//         path: "city",
+//         select: "-__v -createdAt -areas"
+//     });
 
-    next();
-});
+//     next();
+// });
 
 const Area = mongoose.model("Area", areaSchema);
 
