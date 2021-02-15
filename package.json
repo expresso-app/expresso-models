@@ -1,6 +1,6 @@
 {
   "name": "expresso-models",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "expresso models",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "mongoose": "^5.9.23",
+    "mongoose": "^5.11.16",
     "slugify": "^1.4.4",
     "uuid": "^8.2.0",
     "validator": "^13.1.1"
