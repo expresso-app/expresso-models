@@ -38,6 +38,8 @@ const restaurantSchema = new mongoose.Schema({
     },
     deliveryFee: Number,
     specialOffers: Boolean,
+    logo: String,
+    image: String,
     rating: {
         type: Number,
         default: 0,
