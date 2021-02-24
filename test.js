@@ -24,13 +24,15 @@ async function test() {
     // console.log(tag.constructor);
 
 
-    const menuItemOption = await models.MenuItemOption.create({
-        name: "test option",
-        type: "Required",
-        menuItem: "602746efee637f294c112c71"
-    });
+    // const menuItemOption = await models.MenuItemOption.create({
+    //     name: "test option",
+    //     type: "Required",
+    //     menuItem: "602746efee637f294c112c71"
+    // });
+    // console.log("menuItemOption" + menuItemOption);
 
-    console.log("menuItemOption" + menuItemOption);
+    // const category = await models.Category.create({ name: "test category"});
+    // console.log(category);
 }
 
 
