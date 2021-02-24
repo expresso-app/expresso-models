@@ -3,6 +3,7 @@ const Branch = require("./models/branch-model");
 const City = require("./models/city-model");
 const Country = require("./models/country-model");
 const Menu = require("./models/menu-model");
+const Category = require("./models/category-model");
 const Restaurant = require("./models/restaurant-model");
 const Tag = require("./models/tag-model");
 const User = require("./models/user-model");
@@ -17,6 +18,7 @@ module.exports = {
     City,
     Area,
     Tag,
+    Category,
     Restaurant,
     Branch,
     Menu,

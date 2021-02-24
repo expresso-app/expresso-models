@@ -57,6 +57,11 @@ const restaurantSchema = new mongoose.Schema({
         default: new Date(),
     },
     tags: Array,
+    category: {
+        type: mongoose.Schema.ObjectId,
+        ref: "Category",
+        required: [true, "Restaurant must be associated with a category!"]
+    },
     // level: {
     //     type: String,
     //     required: [true, "Restaurant must have a level!"],
@@ -117,6 +122,16 @@ restaurantSchema.pre("save", async function (next) {
 
 //     next();
 // });
+
+// reference category (parent) documnet vai populate()
+restaurantSchema.pre(/^find/, async function(next) {
+    this.populate({
+        path: "category",
+        select: "-__v"
+    });
+
+    next();
+});
 
 // Document middleware: runs AFTER .save() and .create()
 restaurantSchema.post("save", function (doc, next) {
