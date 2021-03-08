@@ -23,6 +23,7 @@ const categorySchema = new mongoose.Schema({
             message: "slug ({VALUE}) is not a valid slug!"
         }
     },
+    image: String,
 });
 
 categorySchema.pre("save", function(next) {
