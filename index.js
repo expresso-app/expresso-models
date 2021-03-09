@@ -11,6 +11,8 @@ const MenuSection = require("./models/menuSection-model");
 const MenuItem = require("./models/menuItem-model");
 const MenuItemOption = require("./models/menuItemOption-model");
 const MenuItemOptionItem = require("./models/menuItemOptionItem-model");
+const Order = require("./models/order-model");
+const OrderItem = require("./models/orderItem-model");
 
 module.exports = {
     User,
@@ -25,5 +27,7 @@ module.exports = {
     MenuSection,
     MenuItem,
     MenuItemOption,
-    MenuItemOptionItem
+    MenuItemOptionItem,
+    Order,
+    OrderItem
 };
