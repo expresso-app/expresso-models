@@ -33,6 +33,21 @@ async function test() {
 
     // const category = await models.Category.create({ name: "test category"});
     // console.log(category);
+
+    const userId = "1f227f4b-0778-4e2a-b11b-8846c0d7dc8c";
+    // const order = await models.Order.create({
+    //     user: userId
+    // });
+    // console.log(order);
+
+    const orderId = "2d473f8f-53a4-4298-b324-76dc164d8519";
+    const menuItemId = "1bc84e76-1aec-494a-a2ee-b77482b43a55";
+    // const orderItem = await models.OrderItem.create({
+    //     order: orderId,
+    //     menuItem: menuItemId,
+    //     quantity: 3
+    // });
+    // console.log(orderItem);
 }
 
 
