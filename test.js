@@ -48,6 +48,19 @@ async function test() {
     //     quantity: 3
     // });
     // console.log(orderItem);
+
+    const menuSection = await models.MenuSection.findOne({id:"89df0712-493a-4311-a526-ce1900f9d085"});
+    // console.log(menuSection._id);
+
+    // const menuItem = await models.MenuItem.create({
+    //     name: "test",
+    //     price: 60,
+    //     description: "jdjdjd",
+    //     menuSection: menuSection._id,
+    //     //options: []
+    // });
+    // console.log(menuItem);
+
 }
 
 

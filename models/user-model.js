@@ -61,6 +61,8 @@ const userSchema = new mongoose.Schema({
         default: true,
         select: false
     },
+    mobile: String,
+    birthDate: Date,
     deliveryAddresses: [{
         id: {
             type: String,
