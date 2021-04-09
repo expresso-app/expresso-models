@@ -7,6 +7,7 @@ const Category = require("./models/category-model");
 const Restaurant = require("./models/restaurant-model");
 const Tag = require("./models/tag-model");
 const User = require("./models/user-model");
+const Address = require("./models/address-model");
 const MenuSection = require("./models/menuSection-model");
 const MenuItem = require("./models/menuItem-model");
 const MenuItemOption = require("./models/menuItemOption-model");
@@ -16,6 +17,7 @@ const OrderItem = require("./models/orderItem-model");
 
 module.exports = {
     User,
+    Address,
     Country,
     City,
     Area,
